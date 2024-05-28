@@ -40,7 +40,7 @@ export const ProductItem = ({ product }: ProductItemProps) => {
         <button
           onClick={() => addToCart(product)}
           type="button"
-          className="w-full relative flex items-center justify-center rounded-md border border-transparent bg-gray-100 px-8 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200 focus:bg-gray-400"
+          className="w-full relative flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-2 text-sm font-medium text-white hover:bg-indigo-700 focus:bg-indigo-800"
         >
           Add to bag
         </button>

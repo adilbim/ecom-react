@@ -4,8 +4,6 @@ import { useQuery } from "@tanstack/react-query";
 import { getProductById } from "../api/products";
 import { classNames } from "../helpers/helpers";
 
-const reviews = { average: 4, totalCount: 1624 };
-
 export default function ProductOverview() {
   const { productId } = useParams();
   const {
@@ -23,6 +21,10 @@ export default function ProductOverview() {
 
   if (error) {
     return <div>Error: {error.message}</div>;
+  }
+
+  if (!product) {
+    return <div>Product not found</div>;
   }
 
   return (
@@ -45,7 +47,7 @@ export default function ProductOverview() {
 
             <div className="flex items-center">
               <p className="text-lg text-gray-900 sm:text-xl">
-                {product?.price}
+                ${product?.price}
               </p>
 
               <div className="ml-4 border-l border-gray-300 pl-4">
@@ -57,7 +59,7 @@ export default function ProductOverview() {
                         <svg
                           key={rating}
                           className={classNames(
-                            reviews.average > rating
+                            product?.rating?.rate > rating
                               ? "text-yellow-400"
                               : "text-gray-300",
                             "h-5 w-5 flex-shrink-0"
@@ -77,10 +79,9 @@ export default function ProductOverview() {
                         </svg>
                       ))}
                     </div>
-                    <p className="sr-only">{reviews.average} out of 5 stars</p>
                   </div>
                   <p className="ml-2 text-sm text-gray-500">
-                    {reviews.totalCount} reviews
+                    {product?.rating?.count} reviews
                   </p>
                 </div>
               </div>
