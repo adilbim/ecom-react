@@ -1,15 +1,17 @@
 import { Product } from "../../api/product.types";
 import { addToCart } from "../../api/db";
 import _ from "lodash";
+import { useNavigate } from "react-router-dom";
 
 type ProductItemProps = {
   product: Product;
 };
 
 export const ProductItem = ({ product }: ProductItemProps) => {
+  const navigate = useNavigate();
   return (
     <>
-      <div className="relative">
+      <div className="relative cursor-pointer" onClick={() => navigate(`/products/${product.id}`)}>
         <div className="relative h-72 w-full overflow-hidden rounded-lg">
           <img
             src={product.image}

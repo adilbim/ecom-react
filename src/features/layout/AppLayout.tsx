@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import { CartButton } from "../../ui/cart/CartButton";
 import { useLiveQuery } from "dexie-react-hooks";
 import { getTotalCartItems } from "../../api/db";
+import { classNames } from "../../helpers/helpers";
 
 const navigation = [
   { name: "Products", href: "/products", current: true },
@@ -9,10 +10,6 @@ const navigation = [
   { name: "Projects", href: "#", current: false },
   { name: "Calendar", href: "#", current: false },
 ];
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export default function AppLayout() {
   const numberOfCartItems = useLiveQuery(() => getTotalCartItems());
@@ -66,13 +63,7 @@ export default function AppLayout() {
         </div>
 
         <div className="py-10">
-          <header>
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <h1 className="text-3xl font-bold leading-tight tracking-tight text-gray-900">
-                Products
-              </h1>
-            </div>
-          </header>
+          
           <main>
             <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
               <Outlet />
