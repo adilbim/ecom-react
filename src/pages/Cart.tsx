@@ -15,11 +15,16 @@ export default function Cart() {
 
   return (
     <div className="bg-white">
+      <header>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl font-bold leading-tight tracking-tight text-gray-900">
+            Items in your shopping cart
+          </h1>
+        </div>
+      </header>
       <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-10 lg:px-8">
         <div className="mt-12">
           <div>
-            <h2 className="sr-only">Items in your shopping cart</h2>
-
             <ul
               role="list"
               className="divide-y divide-gray-200 border-b border-t border-gray-200"
