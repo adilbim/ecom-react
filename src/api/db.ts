@@ -57,4 +57,9 @@ export async function getTotalCartAmount() {
   return _.round(_.sumBy(products, (product) => product.price * product.count), 2);
 }
 
+export async function isProductInCart(id: number): Promise<boolean> {
+  const count = await db.cartList.where('id').equals(id).count();
+  return count > 0;
+}
+
 
