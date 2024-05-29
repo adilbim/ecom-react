@@ -1,15 +1,12 @@
-import { addToCart, isProductInCart } from "../../api/db";
 import { Product } from "../../api/product.types";
+import AddToCartButton from "../../componenets/AddToCartButton";
 import { classNames } from "../../helpers/helpers";
-import { useLiveQuery } from "dexie-react-hooks";
 
 type ProductOverviewItemProps = {
   product: Product;
 };
 
 export const ProductOverviewItem = ({ product } : ProductOverviewItemProps) => {
-  const isInCart = useLiveQuery(() => isProductInCart(product.id));
-
   return (
     <div className="mx-auto max-w-2xl px-4 py-10 sm:px-6 sm:py-10 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
       {/* Product details */}
@@ -113,14 +110,10 @@ export const ProductOverviewItem = ({ product } : ProductOverviewItemProps) => {
           </h2>
           <div>
             <div className="mt-10">
-              <button
-                disabled={isInCart}
-                onClick={() => addToCart(product)}
-                type="button"
+              <AddToCartButton
+                product={product}
                 className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Add to cart
-              </button>
+              />
             </div>
           </div>
         </section>

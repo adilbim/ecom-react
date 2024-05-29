@@ -1,8 +1,7 @@
 import { Product } from "../../api/product.types";
-import { addToCart, isProductInCart } from "../../api/db";
 import _ from "lodash";
 import { useNavigate } from "react-router-dom";
-import { useLiveQuery } from "dexie-react-hooks";
+import AddToCartButton from "../../componenets/AddToCartButton";
 
 type ProductItemProps = {
   product: Product;
@@ -10,8 +9,6 @@ type ProductItemProps = {
 
 export const ProductItem = ({ product }: ProductItemProps) => {
   const navigate = useNavigate();
-  const isInCart = useLiveQuery(() => isProductInCart(product.id));
-
   return (
     <>
       <div
@@ -43,14 +40,10 @@ export const ProductItem = ({ product }: ProductItemProps) => {
         </div>
       </div>
       <div className="mt-6">
-        <button
-          disabled={isInCart}
-          onClick={() => addToCart(product)}
-          type="button"
+        <AddToCartButton
+          product={product}
           className="w-full relative flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-2 text-sm font-medium text-white hover:bg-indigo-700 focus:bg-indigo-800 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          Add to cart
-        </button>
+        />
       </div>
     </>
   );
