@@ -2,7 +2,7 @@ import { Product } from "../../api/product.types";
 import { addToCart, isProductInCart } from "../../api/db";
 import _ from "lodash";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useLiveQuery } from "dexie-react-hooks";
 
 type ProductItemProps = {
   product: Product;
@@ -10,16 +10,7 @@ type ProductItemProps = {
 
 export const ProductItem = ({ product }: ProductItemProps) => {
   const navigate = useNavigate();
-  const [isInCart, setIsInCart] = useState<boolean>(false);
-
-  useEffect(() => {
-    const checkProductInCart = async () => {
-      const isInCart = await isProductInCart(product.id);
-      setIsInCart(isInCart);
-    };
-
-    checkProductInCart();
-  }, [product.id]);
+  const isInCart = useLiveQuery(() => isProductInCart(product.id));
 
   return (
     <>

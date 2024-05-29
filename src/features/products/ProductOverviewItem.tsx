@@ -1,24 +1,14 @@
-import { useEffect, useState } from "react";
 import { addToCart, isProductInCart } from "../../api/db";
 import { Product } from "../../api/product.types";
 import { classNames } from "../../helpers/helpers";
+import { useLiveQuery } from "dexie-react-hooks";
 
 type ProductOverviewItemProps = {
   product: Product;
 };
 
 export const ProductOverviewItem = ({ product } : ProductOverviewItemProps) => {
-  const [isInCart, setIsInCart] = useState<boolean>(false);
-
-  useEffect(() => {
-    const checkProductInCart = async () => {
-      const isInCart = await isProductInCart(product.id);
-      setIsInCart(isInCart);
-    };
-
-    checkProductInCart();
-  }, [product.id]);
-
+  const isInCart = useLiveQuery(() => isProductInCart(product.id));
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-10 sm:px-6 sm:py-10 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
